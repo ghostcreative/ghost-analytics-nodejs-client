@@ -4,7 +4,7 @@
   "description": "api to interact with the ghost payment system",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./test --recursive"
   },
   "author": "",
   "license": "ISC",
@@ -12,5 +12,8 @@
     "bluebird": "^3.4.6",
     "chance": "^1.0.4",
     "request": "^2.74.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0"
   }
 }
