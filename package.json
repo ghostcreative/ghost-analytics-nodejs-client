@@ -1,0 +1,11 @@
+{
+  "name": "ghost-payments",
+  "version": "1.0.0",
+  "description": "api to interact with the ghost payment system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
