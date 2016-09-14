@@ -1,0 +1,101 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@3.9.5
+3 info using node@v6.2.2
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/njgerner/Documents/projects/ghost-analytics-client',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/njgerner/.npm/ghost-analytics-client/1.0.0/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/njgerner/.npm correctMkdir not in flight; initializing
+10 info lifecycle ghost-analytics-client@1.0.0~prepublish: ghost-analytics-client@1.0.0
+11 silly lifecycle ghost-analytics-client@1.0.0~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/njgerner/.npm/ghost-analytics-client/1.0.0/package.tgz',
+12 verbose tar pack   '/Users/njgerner/Documents/projects/ghost-analytics-client' ]
+13 verbose tarball /Users/njgerner/.npm/ghost-analytics-client/1.0.0/package.tgz
+14 verbose folder /Users/njgerner/Documents/projects/ghost-analytics-client
+15 verbose addLocalTarball adding from inside cache /Users/njgerner/.npm/ghost-analytics-client/1.0.0/package.tgz
+16 verbose correctMkdir /Users/njgerner/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd ghost-analytics-client@1.0.0
+18 verbose afterAdd /Users/njgerner/.npm/ghost-analytics-client/1.0.0/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/njgerner/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/njgerner/.npm/ghost-analytics-client/1.0.0/package/package.json written
+21 silly publish { name: 'ghost-analytics-client',
+21 silly publish   version: '1.0.0',
+21 silly publish   description: 'api to interact with the ghost payment system',
+21 silly publish   main: 'index.js',
+21 silly publish   scripts: { test: 'mocha ./test --recursive' },
+21 silly publish   author: '',
+21 silly publish   license: 'ISC',
+21 silly publish   dependencies: { bluebird: '^3.4.6', chance: '^1.0.4', request: '^2.74.0' },
+21 silly publish   devDependencies: { chai: '^3.5.0' },
+21 silly publish   readme: '# Ghost Analytics node.js client \n\n## Installation\n\n`npm install ghost-analytics-client --save`\n\n## Documentation\n\nDocumentation is not yet available.\n\n## API Overview\n\nEvery resource is accessed via your `ghost-analytics-client` instance:\n\n```js\nconst GhostAnalytics = require(\'ghost-analytics-client\')({ publicKey: \' your public key \', secretKey: \' your secret key \' });\n// GhostAnalytics.{ RESOURCE_NAME }.{ METHOD_NAME }\n```\n\nEvery resource method returns a promise (bluebird):\n\n```js\nGhostAnalytics.customer.create({ email: \'customer@example.com\' })\n.then(customer => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Notes\n\n*Where you see `params` it is a plain JavaScript object, e.g. `{ email: \'foo@example.com\' }`*\n*For requests that return a `single` item, the item will be contained inside of the `doc` property in the response body.*\n*For requests that return `multiple` items, the items will be contained inside of the `docs` property in the response body.*\n*For requests that delete an item, the response body will contain `{ success: true }`.*\n\n---\n\n## Account\n\n| Endpoint | Description |\n| ---- | --------------- |\n| [GET /api/v1/accounts/{accountId}] | Get an account|\n\n## `GET /api/v1/accounts/{accountId}`\n\nReturns an account object.\n\n### Example Request\n\n```js\nGhostAnalytics.account.get({ accountId: 1 })\n.then(account => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "doc": {\n    ...the account object\n  }\n}\n```\n\n---\n\n## Charge\n\n| Endpoint | Description |\n| ---- | --------------- |\n| [POST /api/v1/charges] | Create a charge|\n\n## `POST /api/v1/charges`\n\nCreates and returns a charge object.\n\n### Example Request\n\n```js\nGhostAnalytics.charge.create({ \n  amount: 1000, // in cents\n  cardId: card_somecardid,\n  customerId: customer_somecustomerid,\n  description: \'some charge description\',\n})\n.then(charge => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "doc": {\n    the charge object\n  }\n}\n```\n\n---\n\n## CustomerCard\n\n| Endpoint | Description |\n| ---- | --------------- |\n| [GET /api/v1/customers/{customerId}/cards/{cardId}] | Get a customer card|\n| [POST /api/v1/customers//{customerId}] | Create a customer card|\n| [DELETE /api/v1/customers/{customerId}/cards/{cardId}] | Delete a customer card|\n\n## `GET /api/v1/customers/{customerId}/cards/{cardId}`\n\nReturns a customer card object.\n\n### Example Request\n\n```js\nGhostAnalytics.customerCard.get({ \n  cardId: card_somecardid,\n  customerId: customer_somecustomerid\n})\n.then(card => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "doc": {\n    the card object\n  }\n}\n```\n\n## `POST /api/v1/customers/{customerId}/cards`\n\nCreates and returns a customer card object.\n\n### Example Request\n\n```js\nGhostAnalytics.customerCard.get({\n  number: 4242424242424242,\n  expMonth: \'02\',\n  expYear: \'2018\',\n  cvc: 123\n  customerId: customer_somecustomerid\n})\n.then(card => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "doc": {\n    the card object\n  }\n}\n```\n\n## `DELETE /api/v1/customers/{customerId}/cards/{cardId}`\n\nDeletes a customer card object.\n\n### Example Request\n\n```js\nGhostAnalytics.customerCard.delete({\n  cardId: card_somecardid\n  customerId: customer_somecustomerid\n})\n.then(success => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "success": true\n}\n```\n\n---\n\n## Customer\n\n| Endpoint | Description |\n| ---- | --------------- |\n| [GET /api/v1/customers/{customerId}] | Get a customer|\n| [POST /api/v1/customers] | Create a customer|\n| [PUT /api/v1/customers/{customerId}] | Update a customer|\n| [DELETE /api/v1/customers/{customerId}] | Delete a customer|\n\n## `GET /api/v1/customers/{customerId}`\n\nReturns a customer object.\n\n### Example Request\n\n```js\nGhostAnalytics.customer.get({ \n  customerId: customer_somecustomerid\n})\n.then(customer => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "doc": {\n    the customer object\n  }\n}\n```\n\n## `POST /api/v1/customers`\n\nCreates and returns a customer object.\n\n### Example Request\n\n```js\nGhostAnalytics.customer.create({\n  description: \'some customer description\'\n})\n.then(customer => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "doc": {\n    the customer object\n  }\n}\n```\n\n## `PUT /api/v1/customers/{customerId}`\n\nUpdates and returns a customer object.\n\n### Example Request\n\n```js\nGhostAnalytics.customer.update({\n  customerId: customer_somecustomerid,\n  description: \'some new customer description\'\n})\n.then(customer => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "doc": {\n    the customer object\n  }\n}\n```\n\n## `DELETE /api/v1/customers/{customerId}`\n\nDeletes a customer object.\n\n### Example Request\n\n```js\nGhostAnalytics.customer.delete({\n  customerId: customer_somecustomerid\n})\n.then(success => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "success": true\n}\n```\n\n---\n\n## IdentityEvent\n\n| Endpoint | Description |\n| ---- | --------------- |\n| [POST /api/v1/identites/{identityId}/events] | Create an identity event|\n\n## `POST /api/v1/identites/{identityId}/events`\n\nCreates and returns an identity event object.\n\n### Example Request\n\n```js\nGhostAnalytics.identityEvent.create({\n  name: \'Event Click\',\n  identityId: 1,\n  gatId: \'f81d4fae-7dec-11d0-a765-00a0c91e6bf6\',\n  properties: [{\n    \'eventId\': 4,\n    \'userId\': 3 \n  }]\n})\n.then(identityEvent => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "doc": {\n    the identity event object\n  }\n}\n```\n\n---\n\n## Order\n\n| Endpoint | Description |\n| ---- | --------------- |\n| [GET /api/v1/orders/{orderId}] | Get an order|\n| [GET /api/v1/orders] | Fetch orders|\n| [POST /api/v1/orders] | Create an order|\n| [DELETE /api/v1/orders/{orderId}] | Delete an order|\n\n## `GET /api/v1/orders/{orderId}`\n\nReturns an order object.\n\n### Example Request\n\n```js\nGhostAnalytics.order.get({ \n  orderId: 1\n})\n.then(order => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "doc": {\n    the order object\n  }\n}\n```\n\n## `GET /api/v1/orders`\n\nFetches order objects based on input parameters.\n\n### Example Request\n\n```js\nGhostAnalytics.order.fetch({\n  customerId: \' cus_somecustomerid \',\n  limit: 25,\n  offset: 10,\n  sortBy: \'createdAt\',\n  sortDir: \'desc\'\n})\n.then(order => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "doc": {\n    the order object\n  }\n}\n```\n\n## `POST /api/v1/orders`\n\nCreates and returns an order object.\n\n### Example Request\n\n```js\nGhostAnalytics.order.create({\n  amount: 5000, // must match total of orderItem amounts\n  customerId: \' cus_somecustomerid \',\n  cardId: \' card_somecardid \',\n  gatId: \'f81d4fae-7dec-11d0-a765-00a0c91e6bf6\',\n  orderItems: [{\n    amount: 3000,\n    type: \'item\'\n  }, {\n    amount: 1000,\n    type: \'item\',\n    identityId: 1\n  }, {\n    amount: 1000,\n    type: \'fee\',\n    description: \'processing fee\'\n  }]\n})\n.then(order => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "doc": {\n    the order object\n  }\n}\n```\n\n## `DELETE /api/v1/orders/{orderId}`\n\nDeletes an order object.\n\n### Example Request\n\n```js\nGhostAnalytics.order.delete({\n  orderId: 1\n})\n.then(success => { ...do stuff })\n.catch(err => { ...handle error });\n```\n\n### Example Response\n\n```json\n{\n  "success": true\n}\n```\n\n### Errors\n\nAll error responses are in the following format, delivered with the corresponding status code:\n\n```json\n{\n    "message":"Invalid id",\n    "status":400,\n    "error":"Bad Request"\n}\n```',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '6e1920c12f25a0144036bc30664dbf52c7cdd50f',
+21 silly publish   _id: 'ghost-analytics-client@1.0.0',
+21 silly publish   _shasum: 'e1b805fabd5ef6f4e9ecba02018e74b8785a12cc',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name ghost-analytics-client
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'ghost-analytics-client',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   name: 'ghost-analytics-client',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/ghost-analytics-client
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/njgerner/.npm/ghost-analytics-client/1.0.0/package.tgz
+30 verbose request uri https://registry.npmjs.org/ghost-analytics-client
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 9:00:28 PM
+33 verbose request using bearer token for auth
+34 verbose request id 1f09c41ec36de995
+35 http request PUT https://registry.npmjs.org/ghost-analytics-client
+36 http 403 https://registry.npmjs.org/ghost-analytics-client
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '95',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Wed, 14 Sep 2016 01:00:30 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-iad2137-IAD',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1473814829.264349,VS0,VE826',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating /Users/njgerner/.npm/registry.npmjs.org/ghost-analytics-client on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: "You cannot publish over the previously published version 1.0.0." : ghost-analytics-client
+40 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+40 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+40 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:200:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+40 verbose stack     at emitOne (events.js:101:20)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:988:12)
+41 verbose statusCode 403
+42 verbose pkgid ghost-analytics-client
+43 verbose cwd /Users/njgerner/Documents/projects/ghost-analytics-client
+44 error Darwin 15.6.0
+45 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+46 error node v6.2.2
+47 error npm  v3.9.5
+48 error code E403
+49 error "You cannot publish over the previously published version 1.0.0." : ghost-analytics-client
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
