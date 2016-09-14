@@ -2,7 +2,7 @@
 
 ## Installation
 
-`npm install ghost-analytics-client`
+`npm install ghost-analytics-client --save`
 
 ## Documentation
 
