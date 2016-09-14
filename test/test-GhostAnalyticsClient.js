@@ -25,23 +25,14 @@ describe('GhostAnalyticsClient', () => {
     }
   });
   
-  describe('Account', () => {
+  describe('Resources', () => {
     const GhostAnalytics = new GhostAnalyticsClient({ publicKey: 'testPublicKey', secretKey: 'testSecretKey' });
     
-    it ('should get an account', () => {
-      return GhostAnalytics.account.get({ accountId: 1 })
-      .then(data => {
-        expect(data.doc).to.exist;
-        expect(data.doc.id).to.equal(1);
-      })
-    })
-  });
-  
-  describe('Charge', () => {
-    const GhostAnalytics = new GhostAnalyticsClient({ publicKey: 'testPublicKey', secretKey: 'testSecretKey' })
-  });
-  
-  describe('Customer', () => {
-    const GhostAnalytics = new GhostAnalyticsClient({ publicKey: 'testPublicKey', secretKey: 'testSecretKey' })
-  });
+    describe('Account', () => {});
+    describe('Charge', () => {});
+    describe('Customer', () => {});
+    describe('Identity', () => {});
+    describe('IdentityEvent', () => {});
+    describe('Order', () => {});
+  })
 });

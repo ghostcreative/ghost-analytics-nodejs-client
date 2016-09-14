@@ -46,8 +46,8 @@ Returns an account object.
 
 ```js
 GhostAnalytics.account.get({ accountId: 1 })
-.then(account => { //...do stuff })
-.catch(err => { //...handle error });
+.then(account => { ...do stuff })
+.catch(err => { ...handle error });
 ```
 
 ### Example Response
@@ -55,7 +55,7 @@ GhostAnalytics.account.get({ accountId: 1 })
 ```json
 {
   "doc": {
-    // the account object
+    ...the account object
   }
 }
 ```
@@ -79,8 +79,8 @@ GhostAnalytics.charge.create({
   customerId: customer_somecustomerid,
   description: 'some charge description',
 })
-.then(charge => { //...do stuff })
-.catch(err => { //...handle error });
+.then(charge => { ...do stuff })
+.catch(err => { ...handle error });
 ```
 
 ### Example Response
@@ -88,7 +88,7 @@ GhostAnalytics.charge.create({
 ```json
 {
   "doc": {
-    // the charge object
+    the charge object
   }
 }
 ```
@@ -112,8 +112,8 @@ GhostAnalytics.customerCard.get({
   cardId: card_somecardid,
   customerId: customer_somecustomerid
 })
-.then(card => { //...do stuff })
-.catch(err => { //...handle error });
+.then(card => { ...do stuff })
+.catch(err => { ...handle error });
 ```
 
 ### Example Response
@@ -121,7 +121,7 @@ GhostAnalytics.customerCard.get({
 ```json
 {
   "doc": {
-    // the card object
+    the card object
   }
 }
 ```
@@ -140,8 +140,8 @@ GhostAnalytics.customerCard.get({
   cvc: 123
   customerId: customer_somecustomerid
 })
-.then(card => { //...do stuff })
-.catch(err => { //...handle error });
+.then(card => { ...do stuff })
+.catch(err => { ...handle error });
 ```
 
 ### Example Response
@@ -149,7 +149,7 @@ GhostAnalytics.customerCard.get({
 ```json
 {
   "doc": {
-    // the card object
+    the card object
   }
 }
 ```
@@ -165,8 +165,8 @@ GhostAnalytics.customerCard.delete({
   cardId: card_somecardid
   customerId: customer_somecustomerid
 })
-.then(success => { //...do stuff })
-.catch(err => { //...handle error });
+.then(success => { ...do stuff })
+.catch(err => { ...handle error });
 ```
 
 ### Example Response
@@ -181,14 +181,14 @@ GhostAnalytics.customerCard.delete({
 
 | Endpoint | Description |
 | ---- | --------------- |
-| [GET /api/v1/customers/:customerId] | Get a customer|
+| [GET /api/v1/customers/{customerId}] | Get a customer|
 | [POST /api/v1/customers] | Create a customer|
-| [PUT /api/v1/customers/:customerId] | Update a customer|
-| [DELETE /api/v1/customers/:customerId] | Delete a customer|
+| [PUT /api/v1/customers/{customerId}] | Update a customer|
+| [DELETE /api/v1/customers/{customerId}] | Delete a customer|
 
 ## `GET /api/v1/customers/{customerId}`
 
-Returns a customer card object.
+Returns a customer object.
 
 ### Example Request
 
@@ -196,8 +196,8 @@ Returns a customer card object.
 GhostAnalytics.customer.get({ 
   customerId: customer_somecustomerid
 })
-.then(customer => { //...do stuff })
-.catch(err => { //...handle error });
+.then(customer => { ...do stuff })
+.catch(err => { ...handle error });
 ```
 
 ### Example Response
@@ -205,23 +205,23 @@ GhostAnalytics.customer.get({
 ```json
 {
   "doc": {
-    // the customer object
+    the customer object
   }
 }
 ```
 
 ## `POST /api/v1/customers`
 
-Creates and returns a customer card object.
+Creates and returns a customer object.
 
 ### Example Request
 
 ```js
-GhostAnalytics.customerCard.get({
+GhostAnalytics.customer.create({
   description: 'some customer description'
 })
-.then(customer => { //...do stuff })
-.catch(err => { //...handle error });
+.then(customer => { ...do stuff })
+.catch(err => { ...handle error });
 ```
 
 ### Example Response
@@ -229,24 +229,24 @@ GhostAnalytics.customerCard.get({
 ```json
 {
   "doc": {
-    // the customer object
+    the customer object
   }
 }
 ```
 
 ## `PUT /api/v1/customers/{customerId}`
 
-Updates and returns a customer card object.
+Updates and returns a customer object.
 
 ### Example Request
 
 ```js
-GhostAnalytics.customerCard.update({
+GhostAnalytics.customer.update({
   customerId: customer_somecustomerid,
   description: 'some new customer description'
 })
-.then(customer => { //...do stuff })
-.catch(err => { //...handle error });
+.then(customer => { ...do stuff })
+.catch(err => { ...handle error });
 ```
 
 ### Example Response
@@ -254,7 +254,7 @@ GhostAnalytics.customerCard.update({
 ```json
 {
   "doc": {
-    // the customer object
+    the customer object
   }
 }
 ```
@@ -269,8 +269,166 @@ Deletes a customer object.
 GhostAnalytics.customer.delete({
   customerId: customer_somecustomerid
 })
-.then(success => { //...do stuff })
-.catch(err => { //...handle error });
+.then(success => { ...do stuff })
+.catch(err => { ...handle error });
+```
+
+### Example Response
+
+```json
+{
+  "success": true
+}
+```
+
+### [IdentityEvent]
+
+| Endpoint | Description |
+| ---- | --------------- |
+| [POST /api/v1/identites/{identityId}/events] | Create an identity event|
+
+## `POST /api/v1/identites/{identityId}/events`
+
+Creates and returns an identity event object.
+
+### Example Request
+
+```js
+GhostAnalytics.identityEvent.create({
+  name: 'Event Click',
+  identityId: 1,
+  gatId: 'f81d4fae-7dec-11d0-a765-00a0c91e6bf6',
+  properties: [{
+    'eventId': 4,
+    'userId': 3 
+  }]
+})
+.then(identityEvent => { ...do stuff })
+.catch(err => { ...handle error });
+```
+
+### Example Response
+
+```json
+{
+  "doc": {
+    the identity event object
+  }
+}
+```
+
+### [Order]
+
+| Endpoint | Description |
+| ---- | --------------- |
+| [GET /api/v1/orders/{orderId}] | Get an order|
+| [GET /api/v1/orders] | Fetch orders|
+| [POST /api/v1/orders] | Create an order|
+| [DELETE /api/v1/orders/{orderId}] | Delete an order|
+
+## `GET /api/v1/orders/{orderId}`
+
+Returns an order object.
+
+### Example Request
+
+```js
+GhostAnalytics.order.get({ 
+  orderId: 1
+})
+.then(order => { ...do stuff })
+.catch(err => { ...handle error });
+```
+
+### Example Response
+
+```json
+{
+  "doc": {
+    the order object
+  }
+}
+```
+
+## `GET /api/v1/orders`
+
+Fetches order objects based on input parameters.
+
+### Example Request
+
+```js
+GhostAnalytics.order.fetch({
+  customerId: 'cus_somecustomerid',
+  limit: 25,
+  offset: 10,
+  sortBy: 'createdAt',
+  sortDir: 'desc'
+})
+.then(order => { ...do stuff })
+.catch(err => { ...handle error });
+```
+
+### Example Response
+
+```json
+{
+  "doc": {
+    the order object
+  }
+}
+```
+
+## `POST /api/v1/orders`
+
+Creates and returns an order object.
+
+### Example Request
+
+```js
+GhostAnalytics.order.create({
+  amount: 5000, // must match total of orderItem amounts
+  customerId: 'cus_somecustomerid',
+  cardId: 'card_somecardid',
+  gatId: 'f81d4fae-7dec-11d0-a765-00a0c91e6bf6',
+  orderItems: [{
+    amount: 3000,
+    type: 'item'
+  }, {
+    amount: 1000,
+    type: 'item',
+    identityId: 1
+  }, {
+    amount: 1000,
+    type: 'fee',
+    description: 'processing fee'
+  }]
+})
+.then(order => { ...do stuff })
+.catch(err => { ...handle error });
+```
+
+### Example Response
+
+```json
+{
+  "doc": {
+    the order object
+  }
+}
+```
+
+## `DELETE /api/v1/orders/{orderId}`
+
+Deletes an order object.
+
+### Example Request
+
+```js
+GhostAnalytics.order.delete({
+  orderId: 1
+})
+.then(success => { ...do stuff })
+.catch(err => { ...handle error });
 ```
 
 ### Example Response
