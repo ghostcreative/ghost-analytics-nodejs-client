@@ -21,8 +21,8 @@ Every resource method returns a promise (bluebird):
 
 ```js
 GhostAnalytics.customer.create({ email: 'customer@example.com' })
-.then(customer => { //...do stuff })
-.catch(err => { //...handle error });
+.then(customer => { ...do stuff })
+.catch(err => { ...handle error });
 ```
 
 ### Notes
@@ -32,7 +32,9 @@ GhostAnalytics.customer.create({ email: 'customer@example.com' })
 *For requests that return `multiple` items, the items will be contained inside of the `docs` property in the response body.*
 *For requests that delete an item, the response body will contain `{ success: true }`.*
 
-### [Account]
+---
+
+## Account
 
 | Endpoint | Description |
 | ---- | --------------- |
@@ -60,7 +62,9 @@ GhostAnalytics.account.get({ accountId: 1 })
 }
 ```
 
-### [Charge]
+---
+
+## Charge
 
 | Endpoint | Description |
 | ---- | --------------- |
@@ -93,7 +97,9 @@ GhostAnalytics.charge.create({
 }
 ```
 
-### [CustomerCard]
+---
+
+## CustomerCard
 
 | Endpoint | Description |
 | ---- | --------------- |
@@ -177,7 +183,9 @@ GhostAnalytics.customerCard.delete({
 }
 ```
 
-### [Customer]
+---
+
+## Customer
 
 | Endpoint | Description |
 | ---- | --------------- |
@@ -281,7 +289,9 @@ GhostAnalytics.customer.delete({
 }
 ```
 
-### [IdentityEvent]
+---
+
+## IdentityEvent
 
 | Endpoint | Description |
 | ---- | --------------- |
@@ -317,7 +327,9 @@ GhostAnalytics.identityEvent.create({
 }
 ```
 
-### [Order]
+---
+
+## Order
 
 | Endpoint | Description |
 | ---- | --------------- |
