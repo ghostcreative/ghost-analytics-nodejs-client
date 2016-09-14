@@ -370,7 +370,7 @@ Fetches order objects based on input parameters.
 
 ```js
 GhostAnalytics.order.fetch({
-  customerId: 'cus_somecustomerid',
+  customerId: ' cus_somecustomerid ',
   limit: 25,
   offset: 10,
   sortBy: 'createdAt',
@@ -399,8 +399,8 @@ Creates and returns an order object.
 ```js
 GhostAnalytics.order.create({
   amount: 5000, // must match total of orderItem amounts
-  customerId: 'cus_somecustomerid',
-  cardId: 'card_somecardid',
+  customerId: ' cus_somecustomerid ',
+  cardId: ' card_somecardid ',
   gatId: 'f81d4fae-7dec-11d0-a765-00a0c91e6bf6',
   orderItems: [{
     amount: 3000,
