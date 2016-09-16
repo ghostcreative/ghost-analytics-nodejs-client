@@ -1,7 +1,7 @@
 const Chai = require('chai');
 const expect = Chai.expect;
 
-const GhostAnalyticsClient = require('../lib/GhostAnalyticsClient');
+const GhostAnalyticsClient = require('../index');
 
 describe('GhostAnalyticsClient', () => {
   
