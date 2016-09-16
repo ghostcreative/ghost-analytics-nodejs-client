@@ -1,1 +1,1 @@
-require('./lib/GhostAnalyticsClient');
+module.exports = require('./lib/GhostAnalyticsClient');
