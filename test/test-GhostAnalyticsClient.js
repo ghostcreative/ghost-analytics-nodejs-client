@@ -30,7 +30,20 @@ describe('GhostAnalyticsClient', () => {
     
     describe('Account', () => {});
     describe('Charge', () => {});
-    describe('Customer', () => {});
+    describe('Customer', () => {
+      
+      it('should create a customer', (done) => {
+        GhostAnalytics.customer.create({ description: 'This is a test' })
+        .then(customer => {
+          expect(customer).to.exist;
+          expect(customer.description).to.equal('This is a test');
+          done();
+        })
+        .catch(err => {
+          done(err)
+        });
+      });
+    });
     describe('Identity', () => {});
     describe('IdentityEvent', () => {});
     describe('Order', () => {});
