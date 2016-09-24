@@ -46,6 +46,33 @@ describe('GhostAnalyticsClient', () => {
     });
     describe('Identity', () => {});
     describe('IdentityEvent', () => {});
-    describe('Order', () => {});
+    describe('Order', () => {
+      it('should create an order', (done) => {
+        const orderItems = data.orderItems || [{
+            type: 'item',
+            amount: 400
+          }, {
+            type: 'item',
+            amount: 400
+          },{
+            type: 'tax',
+            description: 'sales tax',
+            amount: 200
+          }];
+  
+        GhostAnalytics.order.create({
+          amount: 1000,
+          customerId: 'cus_somecustomer',
+          cardId: 'card_somecard',
+          description: 'test order',
+          orderItems: orderItems
+        })
+        .then(result => {
+          expect(result).to.exist;
+          expect(result.doc).to.exist;
+        })
+        .catch(err => done(err));
+      });
+    });
   })
 });
